@@ -6,6 +6,7 @@
   roles:
     - role: base
     - role: ssummer3.osquery
+    - role: ssummer3.sysdig
 
 - hosts: election
   roles:
