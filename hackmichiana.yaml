@@ -5,6 +5,7 @@
     -  vars/users.yaml
   roles:
     - role: base
+    - role: ssummer3.osquery
 
 - hosts: election
   roles:
