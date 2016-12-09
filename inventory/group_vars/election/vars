@@ -1,0 +1,5 @@
+---
+mysql_login_user: root
+mysql_login_password: '{{ vault_mysql_login_password }}'
+election_login_user: election
+election_login_password: '{{ vault_election_login_password }}'

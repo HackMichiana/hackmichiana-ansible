@@ -1,0 +1,18 @@
+---
+- name: Delete users
+  user:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ remove_users }}"
+
+- name: Create users
+  user:
+    append: yes
+    comment: "{{ item.name }}"
+    groups: sudo
+    name: "{{ item.user }}"
+    shell: /bin/bash
+    state: present
+    update_password: on_create
+  with_items: "{{ add_users }}"
+

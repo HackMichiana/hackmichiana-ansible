@@ -1,0 +1,13 @@
+---
+add_users:
+  - { user: chrisj, name: "Chris Johnson" }
+  - { user: dann, name: "Dan Neumann" }
+  - { user: darylh, name: "Daryl Harris" }
+  - { user: dcarroll, name: "David Carroll" }
+  - { user: jennieleav, name: "Jennielea Vidrich" }
+  - { user: jerryl, name: "Jerry Lagru" }
+  - { user: seans, name: "Sean Summers" }
+
+remove_users:
+  - darrylh
+  - davidc

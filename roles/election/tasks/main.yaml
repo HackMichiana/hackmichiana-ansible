@@ -1,0 +1,25 @@
+---
+- name: Update software
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - mysql-server
+    - python-mysqldb
+
+- name: Election database
+  mysql_db:
+    login_password: "{{ mysql_login_password }}"
+    login_user: "{{ mysql_login_user }}"
+    name: election
+    state: present
+
+- name: Election user
+  mysql_user:
+    login_user: "{{ mysql_login_user }}"
+    login_password: "{{ mysql_login_password }}"
+    name: "{{ election_login_user }}"
+    password: "{{ election_login_password }}"
+    priv: election.*:ALL
+
