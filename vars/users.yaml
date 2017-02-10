@@ -5,7 +5,7 @@ add_users:
   - { user: darylh, name: "Daryl Harris" }
   - { user: dcarroll, name: "David Carroll" }
   - { user: jennieleav, name: "Jennielea Vidrich" }
-  - { user: jerryl, name: "Jerry Lagru" }
+  - { user: jerryl, name: "Jerry Lagrou" }
   - { user: seans, name: "Sean Summers" }
 
 remove_users:
