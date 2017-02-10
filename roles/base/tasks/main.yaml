@@ -5,9 +5,14 @@
     state: absent
   with_items: "{{ remove_users }}"
 
+- name: Create sudo group
+  group:
+    name: sudo
+    state: present
+
 - name: Create users
   user:
-    append: yes
+    append: true
     comment: "{{ item.name }}"
     groups: sudo
     name: "{{ item.user }}"
@@ -15,4 +20,12 @@
     state: present
     update_password: on_create
   with_items: "{{ add_users }}"
+
+- name: Update sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '^%sudo\s'
+    line: '%sudo ALL=(ALL) NOPASSWD:ALL'
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
 

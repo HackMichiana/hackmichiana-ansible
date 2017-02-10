@@ -1,12 +1,35 @@
 ---
-- name: Update software
-  become: yes
+- name: ansible package management
+  setup:
+  when: ansible_pkg_mgr is undefined
+
+- name: setup packages
+  include: '{{ ansible_pkg_mgr }}.yaml'
+
+- name: Install mysql
+  become: true
   package:
     name: "{{ item }}"
     state: latest
-  with_items:
-    - mysql-server
-    - python-mysqldb
+  with_items: "{{ mysql_packages }}"
+
+- name: Enable and start mysql
+  become: true
+  service:
+    name: mysqld
+    enabled: true
+    state: started
+  register: mysql
+
+- name: Setup mysql
+  mysql_user:
+    check_implicit_admin: true
+    host_all: true
+    name: root
+    password: "{{ mysql_login_password }}"
+    state: present
+    update_password: always
+  when: mysql.changed
 
 - name: Election database
   mysql_db:
