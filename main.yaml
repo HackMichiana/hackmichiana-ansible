@@ -5,7 +5,7 @@
   vars_files:
     -  vars/users.yaml
   roles:
-    - role: base
+    - role: hackmichiana
     - role: ssummer3.sysdig
 
 - hosts: election
