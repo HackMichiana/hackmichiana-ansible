@@ -1,0 +1,14 @@
+---
+- name: tsc fix /etc/grub.conf
+  lineinfile:
+    name: /etc/grub.conf
+    backrefs: true
+    state: present
+    regexp: '^(kernel .* selinux=0)$'
+    line: '\1 clocksource=tsc'
+
+- name: tsc fix /etc/rc.local
+  lineinfile:
+    name: /etc/rc.local
+    line: 'echo tsc > /sys/devices/system/clocksource/clocksource0/current_clocksource'
+

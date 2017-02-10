@@ -1,4 +1,15 @@
 ---
+- name: check ssh
+  include: ssh.yaml
+
+- name: fix clocksource
+  include: tsc.yaml
+
+- name: disable transparent_hugepage
+  lineinfile:
+    name: /etc/rc.local
+    line: 'echo never > /sys/kernel/mm/transparent_hugepage/enabled'
+
 - name: blacklist dangerous kernel modules
   kernel_blacklist:
     state: present
@@ -22,6 +33,3 @@
     opts: "{{ item.opts }}"
     state: mounted
   with_items: "{{ system_mounts }}"
-
-- name: check ssh
-  include: ssh.yaml
