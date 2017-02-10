@@ -1,0 +1,27 @@
+---
+- name: blacklist dangerous kernel modules
+  kernel_blacklist:
+    state: present
+    name: "{{ item }}"
+  with_items: "{{ system_module_blacklist }}"
+
+- name: configure system settings
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  with_items: "{{ system_settings }}"
+
+- name: optimize mounts
+  mount:
+    src: "{{ item.src }}"
+    name: "{{ item.path }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{{ item.opts }}"
+    state: mounted
+  with_items: "{{ system_mounts }}"
+
+- name: check ssh
+  include: ssh.yaml

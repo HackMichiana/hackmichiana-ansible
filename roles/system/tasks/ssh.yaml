@@ -1,0 +1,18 @@
+---
+- name: check ssh moduli
+  shell: "awk 'int($1)&&($5<2048) {exit 1}' /etc/ssh/moduli"
+  register: moduli_needs_fixing
+  changed_when: "moduli_needs_fixing.rc == 1"
+  failed_when: false
+
+    
+- name: create temporary file
+  tempfile:
+    state: file
+    suffix: temp
+  register: moduli_temp
+  when: moduli_needs_fixing.changed
+
+- name: harden ssh moduli
+  shell: "awk 'int($1)&&($5>=2048)' /etc/ssh/moduli >{{ moduli_temp.path | quote }} && mv -f {{ moduli_temp.path | quote }} /etc/ssh/moduli && chmod 0644 /etc/ssh/moduli"
+  when: moduli_needs_fixing.changed

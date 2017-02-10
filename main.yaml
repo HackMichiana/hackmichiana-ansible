@@ -1,10 +1,11 @@
 ---
 - hosts: all
   become: true
-  gather_facts: false
+  gather_facts: true
   vars_files:
     -  vars/users.yaml
   roles:
+    - role: system
     - role: hackmichiana
     - role: ssummer3.sysdig
 

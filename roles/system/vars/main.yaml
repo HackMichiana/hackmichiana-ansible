@@ -1,0 +1,51 @@
+---
+system_tz: US/East-Indiana
+
+system_module_blacklist:
+  - xen_fbfront
+  - dccp
+  - rds
+  - sctp
+  - tipc
+  # usb
+  - usbcore
+  - usb-storage
+  # irda
+  - irda
+  - irtty_sir
+  - nsc_ircc
+  - sir_dev
+  # legacy
+  - floppy
+  - joydev
+  - lp
+  - parport
+  - pcspkr
+  - ppdev
+  - psmouse
+  - serio_raw
+
+system_settings:
+  # virtual memory
+  - name: vm.swappiness
+    value: 10
+  - name: vm.vfs_cache_pressure
+    value: 200
+  # ipv6
+  - name: net.ipv6.conf.all.disable_ipv6
+    value: 1
+  - name: net.ipv6.conf.default.disable_ipv6
+    value: 1
+  - name: net.ipv6.conf.lo.disable_ipv6
+    value: 1
+
+system_mounts:
+  - src: tmpfs
+    path: /dev/shm
+    fstype: tmpfs
+    opts: rw,nosuid,nodev,noexec,relatime
+  - src: devpts
+    path: /dev/pts
+    fstype: devpts
+    opts: rw,nosuid,noexec,gid=5,mode=620
+
