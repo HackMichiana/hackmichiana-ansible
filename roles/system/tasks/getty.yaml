@@ -1,0 +1,19 @@
+---
+- name: fix consoles in /etc/sysconfig/init
+  lineinfile:
+    name: /etc/sysconfig/init
+    backrefs: true
+    state: present
+    regexp: '(.*ACTIVE_CONSOLES=).*'
+    line: '\1/dev/tty[1-1]'
+
+- name: tsc fix /etc/rc.local
+  lineinfile:
+    create: true
+    name: '{{ item[0] }}'
+    line: '{{ item[1] }}'
+  with_nested:
+    -
+      - /etc/init/serial.override
+      - /etc/init/start-ttys.override
+    - [ 'stop on startup', 'task', 'exec /bin/true' ]

@@ -1,9 +1,12 @@
 ---
-- name: check ssh
-  include: ssh.yaml
-
 - name: fix clocksource
   include: tsc.yaml
+
+- name: remove unnecessary gettys
+  include: getty.yaml
+
+- name: check ssh
+  include: ssh.yaml
 
 - name: disable transparent_hugepage
   lineinfile:
