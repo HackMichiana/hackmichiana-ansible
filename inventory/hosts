@@ -1,8 +1,16 @@
+[digitalocean]
+treemap.hackmichiana.org
+
+[lightsail]
+52.91.55.77
+
 [treemap]
 treemap.hackmichiana.org
+52.91.55.77
 
 [election]
 treemap.hackmichiana.org
+52.91.55.77
 
 [all:children]
 treemap
