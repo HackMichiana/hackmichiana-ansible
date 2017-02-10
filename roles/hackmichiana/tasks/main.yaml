@@ -1,31 +1,13 @@
 ---
-- name: Delete users
-  user:
+- name: install packages
+  package:
     name: "{{ item }}"
-    state: absent
-  with_items: "{{ remove_users }}"
-
-- name: Create sudo group
-  group:
-    name: sudo
     state: present
+  with_items:
+    - tmux
+    - mosh
+    - git
 
-- name: Create users
-  user:
-    append: true
-    comment: "{{ item.name }}"
-    groups: sudo
-    name: "{{ item.user }}"
-    shell: /bin/bash
-    state: present
-    update_password: on_create
-  with_items: "{{ add_users }}"
-
-- name: Update sudo
-  lineinfile:
-    dest: /etc/sudoers
-    regexp: '^%sudo\s'
-    line: '%sudo ALL=(ALL) NOPASSWD:ALL'
-    state: present
-    validate: "/usr/sbin/visudo -cf %s"
+- name: setup accounts
+  include: users.yaml
 
