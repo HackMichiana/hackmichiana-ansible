@@ -1,11 +1,11 @@
 ---
 - hosts: all
-  become: yes
+  become: true
+  gather_facts: false
   vars_files:
     -  vars/users.yaml
   roles:
     - role: base
-    - role: ssummer3.osquery
     - role: ssummer3.sysdig
 
 - hosts: election
