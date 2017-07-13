@@ -16,7 +16,7 @@
 - name: Enable and start mysql
   become: true
   service:
-    name: mysqld
+    name: "{{ mysql_service }}"
     enabled: true
     state: started
   register: mysql

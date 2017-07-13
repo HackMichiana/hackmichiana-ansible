@@ -1,4 +1,9 @@
 ---
+- name: check for /etc/grub.conf
+  stat:
+    path: /etc/grub.conf
+  register: grub
+
 - name: tsc fix /etc/grub.conf
   lineinfile:
     name: /etc/grub.conf
@@ -6,6 +11,7 @@
     state: present
     regexp: '^(kernel .* selinux=0)$'
     line: '\1 clocksource=tsc'
+  when: grub.stat.exists
 
 - name: tsc fix /etc/rc.local
   lineinfile:

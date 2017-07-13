@@ -1,4 +1,9 @@
 ---
+- name: check for /etc/sysconfig/init
+  stat:
+    path: /etc/sysconfig/init
+  register: init
+
 - name: fix consoles in /etc/sysconfig/init
   lineinfile:
     name: /etc/sysconfig/init
@@ -6,6 +11,7 @@
     state: present
     regexp: '(.*ACTIVE_CONSOLES=).*'
     line: '\1/dev/tty[1-1]'
+  when: init.stat.exists
 
 - name: tsc fix /etc/rc.local
   lineinfile:

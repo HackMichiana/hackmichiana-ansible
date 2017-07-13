@@ -7,7 +7,6 @@
   roles:
     - role: system
     - role: hackmichiana
-    - role: ssummer3.sysdig
 
 - hosts: election
   roles:
