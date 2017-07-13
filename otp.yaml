@@ -1,0 +1,16 @@
+---
+- hosts: lightsail
+  become: true
+  gather_facts: true
+  roles:
+    - role: torian.nodejs
+  tasks:
+    - name: install redis using epel
+      yum:
+        name: redis
+        enablerepo: epel
+        state: present
+    - name: start redis
+      service:
+        name: redis
+        state: started

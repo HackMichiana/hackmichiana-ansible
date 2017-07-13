@@ -1,2 +1,3 @@
 ---
-# - src: ssummer3.sysdig
+- src: torian.nodejs
+- src: openmicroscopy.redis
